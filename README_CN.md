@@ -19,7 +19,7 @@
 ## 安装
 
 ```bash
-go get github.com/ceoifung/go-dashcope
+go get github.com/ceoifung/go-dashscope
 ```
 
 ## 配置
@@ -46,7 +46,7 @@ package main
 import (
 	"context"
 	"fmt"
-	"github.com/ceoifung/go-dashcope/dashscope"
+	"github.com/ceoifung/go-dashscope/dashscope"
 )
 
 func main() {

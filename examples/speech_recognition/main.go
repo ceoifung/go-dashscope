@@ -8,7 +8,7 @@ import (
 	"os"
 	"time"
 
-	"github.com/ceoifung/go-dashcope/dashscope"
+	"github.com/ceoifung/go-dashscope/dashscope"
 )
 
 type MyRecognitionCallback struct{}

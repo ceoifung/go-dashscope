@@ -12,7 +12,7 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/ceoifung/go-dashcope/dashscope"
+	"github.com/ceoifung/go-dashscope/dashscope"
 )
 
 type MyCallback struct {

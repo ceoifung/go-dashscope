@@ -1,10 +1,18 @@
+/*
+ * @Author: Ceoifung
+ * @Date: 2026-02-10 19:35:44
+ * @LastEditors: Ceoifung
+ * @LastEditTime: 2026-02-10 20:04:18
+ * @Description: XiaoRGEEK All Rights Reserved. Powered By Ceoifung
+ */
 package main
 
 import (
 	"context"
 	"fmt"
-	"github.com/ceoifung/go-dashcope/dashscope"
 	"os"
+
+	"github.com/ceoifung/go-dashscope/dashscope"
 )
 
 func main() {

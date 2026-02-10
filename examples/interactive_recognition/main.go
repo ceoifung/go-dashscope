@@ -8,8 +8,8 @@ import (
 	"sync"
 	"time"
 
-	"github.com/ceoifung/go-dashcope/dashscope"
-	"github.com/ceoifung/go-dashcope/examples/audio"
+	"github.com/ceoifung/go-dashscope/dashscope"
+	"github.com/ceoifung/go-dashscope/examples/audio"
 
 	"github.com/eiannone/keyboard"
 )
