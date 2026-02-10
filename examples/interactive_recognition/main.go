@@ -3,12 +3,13 @@ package main
 import (
 	"context"
 	"fmt"
-	"go-dashcope/dashscope"
-	"go-dashcope/examples/audio"
 	"io"
 	"os"
 	"sync"
 	"time"
+
+	"github.com/ceoifung/go-dashcope/dashscope"
+	"github.com/ceoifung/go-dashcope/examples/audio"
 
 	"github.com/eiannone/keyboard"
 )

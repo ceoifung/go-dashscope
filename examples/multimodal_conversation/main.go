@@ -3,8 +3,9 @@ package main
 import (
 	"context"
 	"fmt"
-	"go-dashcope/dashscope"
 	"os"
+
+	"github.com/ceoifung/go-dashcope/dashscope"
 )
 
 func main() {

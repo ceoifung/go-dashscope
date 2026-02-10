@@ -2,7 +2,7 @@
  * @Author: Ceoifung
  * @Date: 2026-02-10 19:29:57
  * @LastEditors: Ceoifung
- * @LastEditTime: 2026-02-10 19:30:00
+ * @LastEditTime: 2026-02-10 19:57:42
  * @Description: XiaoRGEEK All Rights Reserved. Powered By Ceoifung
  */
 // Package dashscope provides a Go SDK for Alibaba Cloud DashScope (ModelScope) API.

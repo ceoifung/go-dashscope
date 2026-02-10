@@ -3,7 +3,7 @@ package main
 import (
 	"context"
 	"fmt"
-	"go-dashcope/dashscope"
+	"github.com/ceoifung/go-dashcope/dashscope"
 	"os"
 )
 

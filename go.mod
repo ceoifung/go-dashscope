@@ -1,4 +1,4 @@
-module go-dashcope
+module github.com/ceoifung/go-dashcope
 
 go 1.24.0
 

@@ -19,9 +19,8 @@ This is a Go SDK for Alibaba Cloud DashScope (ModelScope) API. It allows you to 
 ## Installation
 
 ```bash
-go get github.com/yourusername/go-dashscope
+go get github.com/ceoifung/go-dashcope
 ```
-*(Note: Replace `github.com/yourusername/go-dashscope` with the actual repository path if hosted remotely)*
 
 ## Configuration
 
@@ -47,7 +46,7 @@ package main
 import (
 	"context"
 	"fmt"
-	"go-dashcope/dashscope"
+	"github.com/ceoifung/go-dashcope/dashscope"
 )
 
 func main() {

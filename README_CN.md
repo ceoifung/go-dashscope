@@ -19,9 +19,8 @@
 ## 安装
 
 ```bash
-go get github.com/yourusername/go-dashscope
+go get github.com/ceoifung/go-dashcope
 ```
-*(注意: 请将 `github.com/yourusername/go-dashscope` 替换为实际的仓库地址)*
 
 ## 配置
 
@@ -47,7 +46,7 @@ package main
 import (
 	"context"
 	"fmt"
-	"go-dashcope/dashscope"
+	"github.com/ceoifung/go-dashcope/dashscope"
 )
 
 func main() {

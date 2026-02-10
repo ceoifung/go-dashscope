@@ -3,11 +3,12 @@ package main
 import (
 	"context"
 	"fmt"
-	"go-dashcope/dashscope"
-	"go-dashcope/examples/audio"
 	"io"
 	"os"
 	"time"
+
+	"github.com/ceoifung/go-dashcope/dashscope"
+	"github.com/ceoifung/go-dashcope/examples/audio"
 )
 
 type MyRecognitionCallback struct{}

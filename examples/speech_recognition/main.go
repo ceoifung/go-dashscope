@@ -3,11 +3,12 @@ package main
 import (
 	"context"
 	"fmt"
-	"go-dashcope/dashscope"
 	"io"
 	"net/http"
 	"os"
 	"time"
+
+	"github.com/ceoifung/go-dashcope/dashscope"
 )
 
 type MyRecognitionCallback struct{}
