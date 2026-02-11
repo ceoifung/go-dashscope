@@ -3,6 +3,7 @@ package audio
 import (
 	"fmt"
 	"io"
+	"runtime"
 	"time"
 	"unsafe"
 
@@ -20,24 +21,23 @@ type Recorder struct {
 	acc  *wca.IAudioCaptureClient
 
 	closeCh chan struct{}
+	doneCh  chan struct{}
 }
 
 func NewRecorder() (*Recorder, error) {
-	// Initialize COM.
-	// CoInitializeEx returns S_OK, S_FALSE (already initialized), or RPC_E_CHANGED_MODE.
-	// We want to proceed unless it's a fatal error.
-	if err := ole.CoInitializeEx(0, ole.COINIT_APARTMENTTHREADED); err != nil {
+	r := &Recorder{
+		closeCh: make(chan struct{}),
+		doneCh:  make(chan struct{}),
+	}
+	r.reader, r.writer = io.Pipe()
+
+	// IMPORTANT: Use MTA to avoid thread-affinity issues with Go goroutines
+	if err := ole.CoInitializeEx(0, ole.COINIT_MULTITHREADED); err != nil {
 		oleCode := err.(*ole.OleError).Code()
 		if oleCode != 0x80010106 && oleCode != 0x00000001 {
-			// 0x00000001 is S_FALSE
 			fmt.Printf("Audio: CoInitializeEx warning: %v\n", err)
 		}
 	}
-
-	r := &Recorder{
-		closeCh: make(chan struct{}),
-	}
-	r.reader, r.writer = io.Pipe()
 
 	if err := r.init(); err != nil {
 		r.Close()
@@ -102,7 +102,12 @@ func (r *Recorder) Start() error {
 		return fmt.Errorf("Start failed: %w", err)
 	}
 
-	go r.captureLoop()
+	go func() {
+		runtime.LockOSThread()
+		defer runtime.UnlockOSThread()
+		defer close(r.doneCh)
+		r.captureLoop()
+	}()
 	return nil
 }
 
@@ -125,6 +130,12 @@ func (r *Recorder) captureLoop() {
 		case <-ticker.C:
 			// Read loop
 			for {
+				select {
+				case <-r.closeCh:
+					return
+				default:
+				}
+
 				var packetLength uint32
 				if err = r.acc.GetNextPacketSize(&packetLength); err != nil {
 					// fmt.Printf("GetNextPacketSize error: %v\n", err)
@@ -177,7 +188,17 @@ func (r *Recorder) Read(p []byte) (n int, err error) {
 }
 
 func (r *Recorder) Close() error {
-	close(r.closeCh)
+	select {
+	case <-r.closeCh:
+		// Already closed
+		return nil
+	default:
+		close(r.closeCh)
+	}
+
+	// Wait for capture loop to exit
+	<-r.doneCh
+
 	if r.ac != nil {
 		r.ac.Stop()
 	}
@@ -186,15 +207,19 @@ func (r *Recorder) Close() error {
 	// Release COM objects
 	if r.acc != nil {
 		r.acc.Release()
+		r.acc = nil
 	}
 	if r.ac != nil {
 		r.ac.Release()
+		r.ac = nil
 	}
 	if r.dev != nil {
 		r.dev.Release()
+		r.dev = nil
 	}
 	if r.mmde != nil {
 		r.mmde.Release()
+		r.mmde = nil
 	}
 
 	ole.CoUninitialize()
