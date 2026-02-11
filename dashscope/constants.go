@@ -29,4 +29,12 @@ const (
 	
 	// Tasks (Async)
 	TaskBaseURL = "https://dashscope.aliyuncs.com/api/v1/tasks"
+
+	// TTS Models (Sambert)
+	TTSModelSambertZhichu   = "sambert-zhichu-v1"   // 知厨 - 亲切女声
+	TTSModelSambertZhitian  = "sambert-zhitian-v1"  // 知甜 - 甜美女声
+	TTSModelSambertZhiqi    = "sambert-zhiqi-v1"    // 知其 - 温柔女声
+	TTSModelSambertZhibei   = "sambert-zhibei-v1"   // 知贝 - 童声
+	TTSModelSambertZhixiang = "sambert-zhixiang-v1" // 知祥 - 磁性男声
+	TTSModelSambertZhihao   = "sambert-zhihao-v1"   // 知豪 - 情感男声
 )
